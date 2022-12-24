@@ -4,7 +4,7 @@ export default function Presence() {
   const others = useOthers();
   return (
     <div>
-      <p>{`There are ${others} users present`}</p>
+      <p>{`There are ${others?.length} user(s) present`}</p>
     </div>
   );
 }

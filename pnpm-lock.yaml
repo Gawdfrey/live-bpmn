@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@liveblocks/client': ^0.19.2
+  '@liveblocks/node': ^0.19.2
   '@liveblocks/react': ^0.19.2
   '@next/font': 13.1.0
   '@types/node': 18.11.17
@@ -12,7 +13,7 @@ specifiers:
   eslint: 8.30.0
   eslint-config-next: 13.1.0
   next: 13.1.0
-  next-auth: ^4.18.7
+  next-auth: ^4.15.1
   postcss: ^8.4.20
   prisma: ^4.8.0
   react: 18.2.0
@@ -22,6 +23,7 @@ specifiers:
 
 dependencies:
   '@liveblocks/client': 0.19.2
+  '@liveblocks/node': 0.19.2
   '@liveblocks/react': 0.19.2_react@18.2.0
   '@next/font': 13.1.0
   autoprefixer: 10.4.13_postcss@8.4.20
@@ -110,6 +112,14 @@ packages:
 
   /@liveblocks/core/0.19.2:
     resolution: {integrity: sha512-/gLT7kA8AMzaNKMEruOMmTmcNbuPre2bnJT+K8ecGWpNsKJsnY4kfobfMrSrLSn9Qvi4OiHpa6DahjRZ8Hx2JA==}
+    dev: false
+
+  /@liveblocks/node/0.19.2:
+    resolution: {integrity: sha512-LNXWX98C16/ceHiEaXspJJXL8zidB1RpoKUErcyDJrnPi+yPym6BYA9oua7vx5UIOxPKAWybaqxw5O7TLU64oA==}
+    dependencies:
+      node-fetch: 2.6.7
+    transitivePeerDependencies:
+      - encoding
     dev: false
 
   /@liveblocks/react/0.19.2_react@18.2.0:
@@ -1823,6 +1833,18 @@ packages:
       - babel-plugin-macros
     dev: false
 
+  /node-fetch/2.6.7:
+    resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+    dependencies:
+      whatwg-url: 5.0.0
+    dev: false
+
   /node-releases/2.0.8:
     resolution: {integrity: sha512-dFSmB8fFHEH/s81Xi+Y/15DQY6VHW81nXRj86EMSL3lmuTmK1e+aT4wrFCkTbm+gSwkw4KpX+rT/pMM2c1mF+A==}
     dev: false
@@ -2442,6 +2464,10 @@ packages:
     dependencies:
       is-number: 7.0.0
 
+  /tr46/0.0.3:
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    dev: false
+
   /tsconfig-paths/3.14.1:
     resolution: {integrity: sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==}
     dependencies:
@@ -2527,6 +2553,17 @@ packages:
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
+    dev: false
+
+  /webidl-conversions/3.0.1:
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+    dev: false
+
+  /whatwg-url/5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
     dev: false
 
   /which-boxed-primitive/1.0.2:
