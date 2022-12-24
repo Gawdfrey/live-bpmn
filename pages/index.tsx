@@ -1,18 +1,11 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 export default function Index() {
-  function handleSignIn() {
-    signIn("github");
-  }
-  function handleSignOut() {
-    signOut();
-  }
-  const { data: session } = useSession();
-  console.log(session);
+  const { data } = useSession();
+  console.log(data);
   return (
     <div>
-      <button onClick={handleSignIn}>clik</button>
-      <button onClick={handleSignOut}>clik</button>
+      <p>home</p>
     </div>
   );
 }

@@ -1,23 +1,13 @@
 // @ts-nocheck
-import Image from "next/image";
 import { useOthers } from "../utils/liveblocks.config";
+import { Avatar } from "./Avatar";
 
 export default function Presence() {
   const others = useOthers();
-  console.log(others);
   return (
-    <div>
-      <p>{`There are ${others?.length} user(s) present`}</p>
+    <div className="flex gap-3">
       {others?.map((other) => (
-        <div key={other.connectionId}>
-          <Image
-            width={50}
-            height={50}
-            src={other?.info?.image}
-            className="rounded-full"
-          />
-          <p>{other?.info?.name}</p>
-        </div>
+        <Avatar key={other.connectionId} user={other.info} />
       ))}
     </div>
   );

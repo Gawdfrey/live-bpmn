@@ -6,6 +6,9 @@ import { Auth } from "components/Auth";
 import type { NextComponentType } from "next"; //Import Component type
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import localFont from "@next/font/local";
+import { trpc } from "utils/trpc";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 const monaSans = localFont({
   src: "./Mona-Sans.woff2",
@@ -19,23 +22,29 @@ type CustomAppProps = AppProps & {
 
 const queryClient = new QueryClient();
 
-export default function App({
+const App = ({
   Component,
   pageProps: { session, ...pageProps },
-}: CustomAppProps) {
+}: CustomAppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider session={session}>
-        <main className={`${monaSans.variable} font-sans`}>
-          {Component.auth ? (
-            <Auth>
+        <div className={`${monaSans.variable} font-sans`}>
+          <Header />
+          <main>
+            {Component.auth ? (
+              <Auth>
+                <Component {...pageProps} />
+              </Auth>
+            ) : (
               <Component {...pageProps} />
-            </Auth>
-          ) : (
-            <Component {...pageProps} />
-          )}
-        </main>
+            )}
+          </main>
+          <Footer />
+        </div>
       </SessionProvider>
     </QueryClientProvider>
   );
-}
+};
+
+export default trpc.withTRPC(App);

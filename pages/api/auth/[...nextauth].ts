@@ -12,6 +12,12 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, user }) {
+      const { role, id } = user;
+      return { ...session, user: { ...session.user, role, id } };
+    },
+  },
 };
 
 export default NextAuth(authOptions);

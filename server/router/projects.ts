@@ -1,7 +1,7 @@
 import { router, protectedProcedure } from "../trpc";
 
 export const projectRouter = router({
-  getAll: protectedProcedure.query(() => {
+  getAllProjects: protectedProcedure.query(() => {
     return [];
   }),
 });
