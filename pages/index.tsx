@@ -1,7 +1,4 @@
-import { signIn, signOut } from "next-auth/react";
-import { Inter } from "@next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Index() {
   function handleSignIn() {
@@ -10,6 +7,8 @@ export default function Index() {
   function handleSignOut() {
     signOut();
   }
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <div>
       <button onClick={handleSignIn}>clik</button>
@@ -17,3 +16,5 @@ export default function Index() {
     </div>
   );
 }
+
+Index.auth = false;

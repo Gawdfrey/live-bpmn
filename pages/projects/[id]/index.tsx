@@ -3,7 +3,7 @@ import type { GetServerSideProps } from "next";
 import Presence from "../../../components/Presence";
 import { RoomProvider } from "../../../utils/liveblocks.config";
 
-export default function Room({ id }: { id: string }) {
+export default function Project({ id }: { id: string }) {
   return (
     <RoomProvider id={id} initialPresence={{ cursor: null }}>
       <ClientSideSuspense fallback={<div>Loading...</div>}>
@@ -25,3 +25,5 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   };
 };
+
+Project.auth = true;
