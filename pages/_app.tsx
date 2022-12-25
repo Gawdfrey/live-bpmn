@@ -17,7 +17,7 @@ const monaSans = localFont({
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & { auth?: boolean };
-  sessiob: Session;
+  session: Session;
 };
 
 const queryClient = new QueryClient();
@@ -29,9 +29,11 @@ const App = ({
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider session={session}>
-        <div className={`${monaSans.variable} font-sans`}>
+        <div
+          className={`${monaSans.variable} font-sans flex flex-col h-screen`}
+        >
           <Header />
-          <main>
+          <main className="flex-grow">
             {Component.auth ? (
               <Auth>
                 <Component {...pageProps} />

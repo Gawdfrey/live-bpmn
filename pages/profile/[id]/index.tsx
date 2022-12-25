@@ -1,11 +1,17 @@
+import { DangerButton } from "components/Button";
 import type { GetServerSideProps } from "next";
 import { prismaClient } from "utils/prismadb";
+import { trpc } from "utils/trpc";
 
 export default function Profile({ id }: { id: string }) {
+  const { mutate } = trpc.deleteById.useMutation();
+  const handleDelete = async () => {
+    mutate(id);
+  };
   return (
     <div>
       <h1>Profile</h1>
-      <button onClick={console.log}>Delete me</button>
+      {/* <DangerButton onClick={handleDelete}>Delete my profile</DangerButton> */}
     </div>
   );
 }

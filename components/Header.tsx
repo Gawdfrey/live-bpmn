@@ -22,7 +22,7 @@ export default function Header() {
             <Avatar name={session.user?.name!} image={session.user?.image!} />
           </Link>
         ) : (
-          <Link href="/api/auth/signIn">Sign in</Link>
+          <Link href="/api/auth/signin">Sign in</Link>
         )}
       </nav>
     </header>

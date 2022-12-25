@@ -13,4 +13,13 @@ export const userRouter = router({
       },
     });
   }),
+  deleteById: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input }) => {
+      return await prismaClient.user.delete({
+        where: {
+          id: input,
+        },
+      });
+    }),
 });
