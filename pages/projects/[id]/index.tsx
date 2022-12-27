@@ -23,23 +23,26 @@ export default function Project({ id }: { id: string }) {
   const handleDelete = async () => {
     mutate(id);
   };
+
   return (
     <RoomProvider id={id} initialPresence={{ cursor: null }}>
       <ClientSideSuspense fallback={<div>Loading...</div>}>
         {() => (
-          <div className="container mx-auto flex flex-col gap-5 w-2/4 mt-10">
-            <TitleSection text={project?.name!} />
-            <div>
-              <DangerButton isLoading={isLoading} onClick={handleDelete}>
-                <div>
-                  <CancelIcon />
-                </div>
-                <span>Delete project</span>
-              </DangerButton>
+          <>
+            <div className="container mx-auto flex flex-col gap-5 w-2/4 mt-10">
+              <TitleSection text={project?.name!} />
+              <div>
+                <DangerButton isLoading={isLoading} onClick={handleDelete}>
+                  <div>
+                    <CancelIcon />
+                  </div>
+                  <span>Delete project</span>
+                </DangerButton>
+              </div>
+              <Presence />
             </div>
-            <Presence />
             <BPMN />
-          </div>
+          </>
         )}
       </ClientSideSuspense>
     </RoomProvider>

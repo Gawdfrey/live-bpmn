@@ -9,6 +9,7 @@ import localFont from "@next/font/local";
 import { trpc } from "utils/trpc";
 import Header from "components/Header";
 import Footer from "components/Footer";
+import "reactflow/dist/style.css";
 
 const monaSans = localFont({
   src: "./Mona-Sans.woff2",

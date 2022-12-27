@@ -11,7 +11,6 @@ export default async function handler(
       const { authorization } = req.headers;
 
       if (authorization === `Bearer ${process.env.INSIGHT_SECRET}`) {
-        // just get the length of the users and projects
         const userCount = await prismaClient.user.count();
         const projectCount = await prismaClient.project.count();
 
