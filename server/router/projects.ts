@@ -1,6 +1,9 @@
+import { logsnag } from "utils/logsnag";
 import { prismaClient } from "utils/prismadb";
 import { z } from "zod";
 import { router, protectedProcedure } from "../trpc";
+
+const { NEXT_PUBLIC_LIVEBLOCKS_BASE_URL, LIVEBLOCKS_PRIVATE_KEY } = process.env;
 
 export const projectRouter = router({
   getAllProjects: protectedProcedure
@@ -28,6 +31,14 @@ export const projectRouter = router({
   deleteProjectById: protectedProcedure
     .input(z.string().transform((id) => parseInt(id)))
     .mutation(async ({ input }) => {
+      await fetch(`${NEXT_PUBLIC_LIVEBLOCKS_BASE_URL}/rooms/${input}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${LIVEBLOCKS_PRIVATE_KEY}`,
+        },
+      });
+
       return await prismaClient.project.delete({
         where: {
           id: input,
@@ -43,6 +54,14 @@ export const projectRouter = router({
     )
     .mutation(async ({ input }) => {
       const { name, user } = input;
+
+      await logsnag.publish({
+        channel: "create-project",
+        event: "Project created",
+        icon: "✅",
+        description: `Project ${name} created by ${user}`,
+      });
+
       return await prismaClient.project.create({
         data: {
           name,

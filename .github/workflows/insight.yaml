@@ -1,0 +1,13 @@
+name: daily-insight-cron
+on:
+  schedule:
+    - cron: "0 1 * * *"
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the insight api route
+        run: |
+          curl --request POST \
+          --url 'https://live-bpmn.vercel.app/api/insights' \
+          --header 'Authorization: Bearer ${{ secrets.INSIGHT_SECRET }}'
