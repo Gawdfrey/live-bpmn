@@ -4,12 +4,15 @@ import { useOthers, useUpdateMyPresence } from "utils/liveblocks.config";
 export default function BPMN() {
   const updateMyPresence = useUpdateMyPresence();
   const others = useOthers();
+  // @ts-ignore
   const nodes: Node[] = others?.map((other) => {
     // @ts-ignore
     const position: { x: number; y: number } = other.presence?.cursor;
+    if (!position) return null;
     const id = other.connectionId.toString();
     // @ts-ignore
     const label = other.info?.name;
+
     return {
       id,
       type: "input",
