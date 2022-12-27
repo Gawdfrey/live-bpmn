@@ -24,6 +24,7 @@ export default function BPMN() {
         onPointerMove={(e) =>
           updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
         }
+        onPointerLeave={() => updateMyPresence({ cursor: null })}
         nodes={nodes}
       >
         <Background />
