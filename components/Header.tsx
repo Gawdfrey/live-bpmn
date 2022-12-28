@@ -4,7 +4,7 @@ import { Avatar } from "./Avatar";
 
 const links = [{ href: "/projects", label: "Projects" }];
 
-export default function Header() {
+export function Header() {
   const { data: session } = useSession();
   return (
     <header className="flex justify-between bg-purple-500 text-white py-5 px-10">

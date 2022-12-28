@@ -12,7 +12,7 @@ export default function Project({ id }: { id: string }) {
   return (
     <RoomProvider
       id={id}
-      initialPresence={{ cursor: null }}
+      initialPresence={{ cursor: null, selectedNode: null }}
       initialStorage={() => ({
         nodes: new LiveList([
           {

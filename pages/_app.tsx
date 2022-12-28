@@ -7,8 +7,8 @@ import type { NextComponentType } from "next"; //Import Component type
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import localFont from "@next/font/local";
 import { trpc } from "utils/trpc";
-import Header from "components/Header";
-import Footer from "components/Footer";
+import { Header } from "components/Header";
+import { Footer } from "components/Footer";
 import "reactflow/dist/style.css";
 
 const monaSans = localFont({

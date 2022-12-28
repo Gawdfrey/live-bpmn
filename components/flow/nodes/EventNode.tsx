@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Position } from "reactflow";
 import { Handle } from "../Handle";
 
@@ -6,7 +6,7 @@ export function EventNode({ data }: { data: any }) {
   const [label, setLabel] = useState(data.label);
   const [isSelected, setIsSelected] = useState(false);
 
-  function handleClicks(e: any) {
+  function handleClicks(e: React.MouseEvent) {
     switch (e.detail) {
       case 1:
         setIsSelected(!isSelected);
@@ -25,14 +25,14 @@ export function EventNode({ data }: { data: any }) {
       <Handle position={Position.Top} type="source" />
       <div className="relative">
         <div
-          className={`flex text-center rounded-full border-2 border-white aspect-square text-white p-5 ${
+          className={`flex rounded-full aspect-square text-bg p-5 bg-white ${
             isSelected
               ? "outline-dashed outline-white outline-2 outline-offset-8"
               : ""
           }`}
           onClick={handleClicks}
         >
-          {label}
+          <span className="m-auto text-center">{label}</span>
         </div>
         <div className="absolute inset-0 bg-gradient-to-tr from-pink-600 to-purple-600 blur-2xl rounded-3xl -z-50" />
       </div>

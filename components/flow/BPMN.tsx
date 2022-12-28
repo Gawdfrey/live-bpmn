@@ -1,11 +1,5 @@
 import Link from "next/link";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactFlow, {
   addEdge,
   applyEdgeChanges,
@@ -17,10 +11,8 @@ import ReactFlow, {
   Node,
   NodeChange,
   ReactFlowInstance,
-  ReactFlowRefType,
 } from "reactflow";
 import { useStorage, useUpdateMyPresence } from "utils/liveblocks.config";
-import { EventNode } from "./nodes/EventNode";
 import FullPageLoading from "../FullPageLoading";
 import BackArrowIcon from "../icons/BackArrowIcon";
 import Presence from "components/Presence";
@@ -28,6 +20,7 @@ import { SettingsIcon } from "components/icons/SettingsIcon";
 import Modal from "components/Modal";
 import { EditProject } from "components/project/EditProject";
 import { CreationSidebar } from "./CreationSidebar";
+import { NodeTypeArray } from "utils/flow";
 
 export default function BPMN({
   name,
@@ -36,7 +29,7 @@ export default function BPMN({
   name: string;
   projectId: string;
 }) {
-  const reactFlowWrapper = useRef(null);
+  const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const updateMyPresence = useUpdateMyPresence();
   const [showModal, setShowModal] = useState(false);
   // @ts-ignore
@@ -76,7 +69,7 @@ export default function BPMN({
       event.preventDefault();
 
       if (!reactFlowWrapper.current) return;
-      // @ts-ignore
+
       const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
       const type = event.dataTransfer.getData("application/reactflow");
 
@@ -101,7 +94,6 @@ export default function BPMN({
     [reactFlowInstance]
   );
 
-  const nodeTypes = useMemo(() => ({ event: EventNode }), []);
   if (!nodes) return <FullPageLoading />;
   return (
     <div className="w-full h-screen">
@@ -112,7 +104,8 @@ export default function BPMN({
           }
           onPointerLeave={() => updateMyPresence({ cursor: null })}
           nodes={nodes!}
-          nodeTypes={nodeTypes}
+          edges={edges!}
+          nodeTypes={NodeTypeArray}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
