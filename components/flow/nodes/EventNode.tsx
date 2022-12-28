@@ -23,16 +23,18 @@ export function EventNode({ data }: { data: any }) {
   return (
     <>
       <Handle position={Position.Top} type="source" />
-
-      <div
-        className={`flex text-center rounded-full border-2 border-white aspect-square text-white p-5 ${
-          isSelected
-            ? "outline-dashed outline-white outline-2 outline-offset-8"
-            : ""
-        }`}
-        onClick={handleClicks}
-      >
-        {label}
+      <div className="relative">
+        <div
+          className={`flex text-center rounded-full border-2 border-white aspect-square text-white p-5 ${
+            isSelected
+              ? "outline-dashed outline-white outline-2 outline-offset-8"
+              : ""
+          }`}
+          onClick={handleClicks}
+        >
+          {label}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-pink-600 to-purple-600 blur-2xl rounded-3xl -z-50" />
       </div>
     </>
   );
