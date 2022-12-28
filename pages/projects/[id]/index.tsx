@@ -9,7 +9,6 @@ import { RoomProvider } from "../../../utils/liveblocks.config";
 
 export default function Project({ id }: { id: string }) {
   const { data: project } = trpc.getProjectById.useQuery(id);
-
   return (
     <RoomProvider
       id={id}
@@ -31,7 +30,7 @@ export default function Project({ id }: { id: string }) {
       })}
     >
       <ClientSideSuspense fallback={<div>...loading</div>}>
-        {() => <BPMN name={project?.name!} />}
+        {() => <BPMN name={project?.name!} projectId={id} />}
       </ClientSideSuspense>
     </RoomProvider>
   );

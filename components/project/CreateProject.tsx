@@ -1,11 +1,11 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import { PrimaryButton } from "./Button";
-import PlusIcon from "./icons/PlusIcon";
+import { PrimaryButton } from "../Button";
+import PlusIcon from "../icons/PlusIcon";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { trpc } from "utils/trpc";
 import { useSession } from "next-auth/react";
-import { FormFieldError } from "./FormFieldError";
+import { FormFieldError } from "../FormFieldError";
 
 export default function CreateProject({ callback }: { callback?: () => void }) {
   const { data: session } = useSession();

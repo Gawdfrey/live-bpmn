@@ -1,5 +1,5 @@
 import { PrimaryButton } from "components/Button";
-import CreateProject from "components/CreateProject";
+import CreateProject from "components/project/CreateProject";
 import PlusIcon from "components/icons/PlusIcon";
 import Loading from "components/Loading";
 import Modal from "components/Modal";

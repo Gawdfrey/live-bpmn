@@ -17,9 +17,18 @@ import FullPageLoading from "../FullPageLoading";
 import BackArrowIcon from "../icons/BackArrowIcon";
 import Presence from "components/Presence";
 import { SettingsIcon } from "components/icons/SettingsIcon";
+import Modal from "components/Modal";
+import { EditProject } from "components/project/EditProject";
 
-export default function BPMN({ name }: { name: string }) {
+export default function BPMN({
+  name,
+  projectId,
+}: {
+  name: string;
+  projectId: string;
+}) {
   const updateMyPresence = useUpdateMyPresence();
+  const [showModal, setShowModal] = useState(false);
   // @ts-ignore
   const initialNodes = useStorage<Node[]>(({ nodes }) => nodes);
 
@@ -69,7 +78,11 @@ export default function BPMN({ name }: { name: string }) {
           </Link>
 
           <h1 className="text-2xl">{name}</h1>
-          <button className="my-auto">
+          <button
+            className="my-auto"
+            type="button"
+            onClick={() => setShowModal(!showModal)}
+          >
             <SettingsIcon
               width={20}
               height={20}
@@ -83,6 +96,19 @@ export default function BPMN({ name }: { name: string }) {
         <Background />
         <Controls />
       </ReactFlow>
+      <Modal
+        title="Edit project"
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+      >
+        <EditProject
+          callback={() => setShowModal(false)}
+          id={projectId}
+          defaultValues={{
+            name,
+          }}
+        />
+      </Modal>
     </div>
   );
 }

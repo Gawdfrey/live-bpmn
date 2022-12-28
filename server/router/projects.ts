@@ -71,4 +71,23 @@ export const projectRouter = router({
         },
       });
     }),
+  updateProjectById: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { id, name } = input;
+
+      return await prismaClient.project.update({
+        where: {
+          id: parseInt(id),
+        },
+        data: {
+          name,
+        },
+      });
+    }),
 });
