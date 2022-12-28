@@ -4,7 +4,7 @@ import { Avatar } from "./Avatar";
 export default function Presence() {
   const others = useOthers();
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 w-24">
       {others?.map((other) => {
         // @ts-ignore
         const name = other.info?.name;

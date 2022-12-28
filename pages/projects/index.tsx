@@ -56,10 +56,12 @@ export default function Projects() {
         isOpen={showModal}
         onClose={() => setShowModal(false)}
       >
-        <CreateProject />
+        <CreateProject callback={() => setShowModal(false)} />
       </Modal>
     </>
   );
 }
 
 Projects.auth = true;
+Projects.renderFooter = true;
+Projects.renderHeader = true;

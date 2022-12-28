@@ -7,3 +7,5 @@ export default function Index() {
 }
 
 Index.auth = false;
+Index.renderFooter = true;
+Index.renderHeader = true;

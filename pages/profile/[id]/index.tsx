@@ -26,6 +26,8 @@ export default function Profile({ id }: { id: string }) {
 }
 
 Profile.auth = true;
+Profile.renderFooter = true;
+Profile.renderHeader = true;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params!.id;

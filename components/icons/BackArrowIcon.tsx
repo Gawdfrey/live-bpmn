@@ -1,6 +1,6 @@
 import type { IconProps } from "types/components";
 
-export default function PlusIcon({
+export default function BackArrowIcon({
   width = 24,
   height = 24,
   className = "",
@@ -20,7 +20,7 @@ export default function PlusIcon({
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M6 12h6m6 0h-6m0 0V6m0 6v6"
+        d="M19 12H6m0 0 6-6m-6 6 6 6"
       />
     </svg>
   );

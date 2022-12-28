@@ -1,8 +1,8 @@
 import type { IconProps } from "types/components";
 
-export default function LoadingIcon({
-  height = 18,
-  width = 18,
+export function SettingsIcon({
+  width = 24,
+  height = 24,
   className = "",
 }: IconProps) {
   return (
@@ -12,27 +12,21 @@ export default function LoadingIcon({
       strokeWidth="1.5"
       color="currentColor"
       viewBox="0 0 24 24"
-      height={height}
       width={width}
+      height={height}
       className={className}
     >
       <path
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M21 8a10 10 0 0 0-9-6C7 2 3 6 2 11"
+        d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
       />
       <path
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M17 8h4a1 1 0 0 0 1-1V3M3 16a10 10 0 0 0 19-3"
-      />
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M7 16H3a1 1 0 0 0-1 1v4"
+        d="m20 10-1-2 1-2-2-2-2 1-2-1-1-2h-2l-1 2-2 2-2-2-2 2 1 2-1 2-2 1v2l2 1 2 2-2 2 2 2 2-1 2 1 1 2h2l1-2 2-1 2 1 2-2-1-2 1-2 2-1v-2l-2-1z"
       />
     </svg>
   );

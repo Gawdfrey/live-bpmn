@@ -17,7 +17,11 @@ const monaSans = localFont({
 });
 
 type CustomAppProps = AppProps & {
-  Component: NextComponentType & { auth?: boolean };
+  Component: NextComponentType & {
+    auth?: boolean;
+    renderFooter?: boolean;
+    renderHeader?: boolean;
+  };
   session: Session;
 };
 
@@ -33,7 +37,7 @@ const App = ({
         <div
           className={`${monaSans.variable} font-sans flex flex-col h-screen`}
         >
-          <Header />
+          {Component.renderHeader && <Header />}
           <main className="flex-grow">
             {Component.auth ? (
               <Auth>
@@ -43,7 +47,7 @@ const App = ({
               <Component {...pageProps} />
             )}
           </main>
-          <Footer />
+          {Component.renderFooter && <Footer />}
         </div>
       </SessionProvider>
     </QueryClientProvider>

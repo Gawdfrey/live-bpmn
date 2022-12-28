@@ -7,19 +7,20 @@ import { trpc } from "utils/trpc";
 import { useSession } from "next-auth/react";
 import { FormFieldError } from "./FormFieldError";
 
-export default function CreateProject() {
+export default function CreateProject({ callback }: { callback?: () => void }) {
   const { data: session } = useSession();
   const userId = session?.user?.id;
-  const methods = useForm<CreateProjectType>({
+  const methods = useForm<FormValues>({
     defaultValues: {
       name: "",
     },
     resolver: zodResolver(CreateProject.validationSchema),
   });
   const { handleSubmit, register, formState } = methods;
-  const { mutate } = trpc.createProject.useMutation();
-  function onSubmit({ name }: CreateProjectType) {
+  const { mutate, isLoading } = trpc.createProject.useMutation();
+  function onSubmit({ name }: FormValues) {
     mutate({ name, user: userId! });
+    if (callback) callback();
   }
 
   const error = formState.errors.name?.message;
@@ -41,7 +42,7 @@ export default function CreateProject() {
           </div>
         </div>
         <div>
-          <PrimaryButton type="submit">
+          <PrimaryButton type="submit" isLoading={isLoading}>
             <div className="my-auto">
               <PlusIcon />
             </div>
@@ -57,6 +58,4 @@ CreateProject.validationSchema = z.object({
   name: z.string().min(1).max(50),
 });
 
-type CreateProjectType = {
-  name: string;
-};
+type FormValues = z.infer<typeof CreateProject.validationSchema>;

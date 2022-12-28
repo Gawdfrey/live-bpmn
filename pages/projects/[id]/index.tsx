@@ -1,49 +1,37 @@
+import { LiveList } from "@liveblocks/client";
 import { ClientSideSuspense } from "@liveblocks/react";
-import BPMN from "components/BPMN";
-import { DangerButton } from "components/Button";
-import CancelIcon from "components/icons/CancelIcon";
-import TitleSection from "components/TitleSection";
+import BPMN from "components/flow/BPMN";
 import type { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+import { NodeTypes } from "types/Flow";
 import { prismaClient } from "utils/prismadb";
 import { trpc } from "utils/trpc";
-import Presence from "../../../components/Presence";
 import { RoomProvider } from "../../../utils/liveblocks.config";
 
 export default function Project({ id }: { id: string }) {
-  const router = useRouter();
-
   const { data: project } = trpc.getProjectById.useQuery(id);
 
-  const { mutate, isLoading } = trpc.deleteProjectById.useMutation({
-    onSuccess() {
-      router.push("/projects");
-    },
-  });
-  const handleDelete = async () => {
-    mutate(id);
-  };
-
   return (
-    <RoomProvider id={id} initialPresence={{ cursor: null }}>
-      <ClientSideSuspense fallback={<div>Loading...</div>}>
-        {() => (
-          <>
-            <div className="container mx-auto flex flex-col gap-5 w-2/4 mt-10">
-              <TitleSection text={project?.name!} />
-              <div>
-                <DangerButton isLoading={isLoading} onClick={handleDelete}>
-                  <div>
-                    <CancelIcon />
-                  </div>
-                  <span>Delete project</span>
-                </DangerButton>
-              </div>
-              <Presence />
-            </div>
-            <BPMN />
-          </>
-        )}
+    <RoomProvider
+      id={id}
+      initialPresence={{ cursor: null }}
+      initialStorage={() => ({
+        nodes: new LiveList([
+          {
+            id: "1",
+            type: NodeTypes.EVENT,
+            data: {
+              label: "Start",
+            },
+            position: {
+              x: 0,
+              y: 0,
+            },
+          },
+        ]),
+      })}
+    >
+      <ClientSideSuspense fallback={<div>...loading</div>}>
+        {() => <BPMN name={project?.name!} />}
       </ClientSideSuspense>
     </RoomProvider>
   );
@@ -70,3 +58,5 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 };
 
 Project.auth = true;
+Project.renderFooter = false;
+Project.renderHeader = false;
