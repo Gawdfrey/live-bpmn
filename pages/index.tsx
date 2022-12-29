@@ -1,7 +1,9 @@
+import TitleSection from "components/TitleSection";
+
 export default function Index() {
   return (
-    <div>
-      <p>home</p>
+    <div className="container mx-auto flex flex-col gap-5 w-2/4 mt-10">
+      <TitleSection text="Home" />
     </div>
   );
 }

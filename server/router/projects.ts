@@ -9,15 +9,15 @@ export const projectRouter = router({
   getAllProjects: protectedProcedure
     .input(z.string())
     .query(async ({ input }) => {
-      return await prismaClient.project.findMany({
+      const projectUser = await prismaClient.projectUser.findMany({
         where: {
-          users: {
-            some: {
-              id: input,
-            },
-          },
+          userId: input,
+        },
+        include: {
+          project: true,
         },
       });
+      return projectUser.map(({ project }) => project);
     }),
   getProjectById: protectedProcedure
     .input(z.string().transform((id) => parseInt(id)))
@@ -39,6 +39,19 @@ export const projectRouter = router({
         },
       });
 
+      await prismaClient.projectUser.deleteMany({
+        where: {
+          projectId: input,
+        },
+      });
+
+      await logsnag.publish({
+        channel: "project",
+        event: "Project deleted",
+        icon: "❌",
+        description: `Project with id ${input} deleted`,
+      });
+
       return await prismaClient.project.delete({
         where: {
           id: input,
@@ -56,17 +69,22 @@ export const projectRouter = router({
       const { name, user } = input;
 
       await logsnag.publish({
-        channel: "create-project",
+        channel: "project",
         event: "Project created",
         icon: "✅",
         description: `Project ${name} created by ${user}`,
       });
 
-      return await prismaClient.project.create({
+      return await prismaClient.projectUser.create({
         data: {
-          name,
-          users: {
+          user: {
             connect: { id: user },
+          },
+          role: "OWNER",
+          project: {
+            create: {
+              name,
+            },
           },
         },
       });
