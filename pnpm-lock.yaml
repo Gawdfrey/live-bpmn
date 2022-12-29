@@ -26,6 +26,7 @@ specifiers:
   logsnag: ^0.1.6
   next: 13.1.0
   next-auth: ^4.15.1
+  perfect-cursors: ^1.0.5
   postcss: ^8.4.20
   react: 18.2.0
   react-dom: 18.2.0
@@ -56,6 +57,7 @@ dependencies:
   logsnag: 0.1.6
   next: 13.1.0_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.7_s75y6mxmikaw2mhqmuko6w7njm
+  perfect-cursors: 1.0.5
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.41.1_react@18.2.0
@@ -798,6 +800,10 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /@tldraw/vec/1.8.0:
+    resolution: {integrity: sha512-GiS5Df3CzXY/fPBFcM0CKFERZfI4Cg1X33VPZX+NLo7Fwm/h9zu/aU24N1mG75Q9LuMnwKm7woxKr8BiUXGYCg==}
     dev: false
 
   /@trpc/client/10.7.0_@trpc+server@10.7.0:
@@ -2753,6 +2759,12 @@ packages:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
     dev: true
+
+  /perfect-cursors/1.0.5:
+    resolution: {integrity: sha512-LgQJj6QtF6VzYODurlhF9Ayt2liiadJZBocK98brcCC6D/dRtZlSU/r0mXWDoCdGPiO24oJB1+PZKz4p9hblWg==}
+    dependencies:
+      '@tldraw/vec': 1.8.0
+    dev: false
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}

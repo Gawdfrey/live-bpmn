@@ -12,7 +12,11 @@ import ReactFlow, {
   NodeChange,
   ReactFlowInstance,
 } from "reactflow";
-import { useStorage, useUpdateMyPresence } from "utils/liveblocks.config";
+import {
+  useOthers,
+  useStorage,
+  useUpdateMyPresence,
+} from "utils/liveblocks.config";
 import FullPageLoading from "../FullPageLoading";
 import BackArrowIcon from "../icons/BackArrowIcon";
 import Presence from "components/Presence";
@@ -21,6 +25,7 @@ import Modal from "components/Modal";
 import { EditProject } from "components/project/EditProject";
 import { CreationSidebar } from "./CreationSidebar";
 import { NodeTypeArray } from "utils/flow";
+import { Cursor } from "components/Cursor";
 
 export default function BPMN({
   name,
@@ -32,6 +37,7 @@ export default function BPMN({
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const updateMyPresence = useUpdateMyPresence();
   const [showModal, setShowModal] = useState(false);
+  const others = useOthers();
   // @ts-ignore
   const initialNodes = useStorage<Node[]>(({ nodes }) => nodes);
   const [reactFlowInstance, setReactFlowInstance] =
@@ -137,6 +143,13 @@ export default function BPMN({
           <div className="absolute top-3 right-3 z-50">
             <Presence />
           </div>
+
+          {others.map((other) => {
+            if (!other.presence?.cursor) return null;
+            // @ts-ignore
+            const { x, y } = other.presence?.cursor;
+            return <Cursor color="red" x={x} y={y} />;
+          })}
           <Background />
           <Controls />
           <CreationSidebar />

@@ -4,7 +4,7 @@ import { TaskNode } from "components/flow/nodes/TaskNode";
 import { EventIcon } from "components/icons/EventIcon";
 import { GatewayIcon } from "components/icons/GatewayIcon";
 import { TaskIcon } from "components/icons/TaskIcon";
-import { NodeTypes as ReactFlowNodeTypes, Position } from "reactflow";
+import { NodeTypes as ReactFlowNodeTypes } from "reactflow";
 import { NodeTypes } from "types/Flow";
 
 export const NodeMetadata = [
